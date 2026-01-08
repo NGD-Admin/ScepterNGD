@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join ScepterNGD Minecraft Server</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+    p {
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn-join {
+      background: #2ecc71;
+      color: #000;
+    }
+    .btn-copy {
+      background: #3498db;
+      color: #fff;
+    }
+    .info {
+      margin-top: 18px;
+      background: rgba(255,255,255,0.08);
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    .small {
+      font-size: 13px;
+      opacity: 0.8;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🟩 ScepterNGD</h1>
+    <p>Tap the button below to add the server in <strong>Minecraft Bedrock Edition</strong>.</p>
+
+    <button class="btn btn-join" onclick="openMinecraft()">Open Minecraft (Bedrock)</button>
+    <button class="btn btn-copy" onclick="copyIP()">Copy Server IP</button>
+
+    <div class="info">
+      <strong>Server Address:</strong><br>
+      scepterngd19.minecra.fr<br>
+      <strong>Port:</strong> 25798
+    </div>
+
+    <div class="small">
+      Works on Android, iOS, and Windows Bedrock.<br>
+      Consoles & Java Edition are not supported by the join button.
+    </div>
+  </div>
+
+  <script>
+    function openMinecraft() {
+      window.location.href = "minecraft://?addExternalServer=ScepterNGD|scepterngd19.minecra.fr:25798";
+    }
+
+    function copyIP() {
+      navigator.clipboard.writeText("scepterngd19.minecra.fr:25798");
+      alert("Server address copied! Paste it in Minecraft → Servers → Add Server");
+    }
+  </script>
+</body>
+</html>
