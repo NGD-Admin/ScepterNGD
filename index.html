@@ -3,96 +3,223 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join ScepterNGD Minecraft Server</title>
+  <title>ScepterNGD | Minecraft Server</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(180deg, #000000, #0a0a0a);
       color: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
     }
+
     .card {
-      background: rgba(0, 0, 0, 0.55);
-      border-radius: 16px;
-      padding: 24px;
-      max-width: 420px;
+      background: #050505;
+      border-radius: 22px;
+      padding: 32px 26px 30px;
+      max-width: 520px;
       width: 100%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      box-shadow: 0 0 35px rgba(255,255,255,0.15);
+      text-align: center;
+      border: 2px solid rgba(255,255,255,0.35);
+    }
+
+    .logo {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 12px;
+      background: url('photo/NGD\ MC\ LOGO26\ V1.png') center / contain no-repeat;
+      filter: drop-shadow(0 0 12px rgba(255,255,255,0.6));
+    }
+
+    h1 { font-size: 32px; letter-spacing: 2px; }
+    p { opacity: 0.85; font-size: 15px; }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      margin: 14px 0;
+      font-size: 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+    }
+
+    .btn-join {
+      background: #ffffff;
+      color: #000;
+      box-shadow: 0 0 18px rgba(255,255,255,0.8);
+    }
+
+    .btn-copy {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.6);
+    }
+
+    .gallery {
+      margin-top: 26px;
+    }
+
+    .gallery h2 {
+      font-size: 18px;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .photo {
+      position: relative;
+      height: 110px;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.25);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .photo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(255,255,255,0.7);
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.7);
+      font-size: 12px;
+      padding: 6px;
       text-align: center;
     }
-    h1 {
-      margin-top: 0;
-      font-size: 28px;
+
+    /* Fullscreen Viewer */
+    .viewer {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      flex-direction: column;
     }
-    p {
-      opacity: 0.9;
-      line-height: 1.5;
+
+    .viewer img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.5);
     }
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      margin: 12px 0;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .btn-join {
-      background: #2ecc71;
-      color: #000;
-    }
-    .btn-copy {
-      background: #3498db;
-      color: #fff;
-    }
-    .info {
-      margin-top: 18px;
-      background: rgba(255,255,255,0.08);
-      padding: 14px;
-      border-radius: 10px;
+
+    .viewer .viewer-caption {
+      margin-top: 14px;
       font-size: 14px;
+      opacity: 0.85;
     }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
     .small {
       font-size: 13px;
-      opacity: 0.8;
-      margin-top: 10px;
+      opacity: 0.7;
+      margin-top: 18px;
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>🟩 ScepterNGD</h1>
-    <p>Tap the button below to add the server in <strong>Minecraft Bedrock Edition</strong>.</p>
+    <div class="logo"></div>
+    <h1>SCEPTERNGD</h1>
+    <p>NextGenDominators Minecraft Bedrock Server</p>
 
-    <button class="btn btn-join" onclick="openMinecraft()">Open Minecraft (Bedrock)</button>
-    <button class="btn btn-copy" onclick="copyIP()">Copy Server IP</button>
+    <button class="btn btn-join" onclick="openMinecraft()">Join Server</button>
+    <button class="btn btn-copy" onclick="copyIP()">Copy Server Address</button>
 
-    <div class="info">
-      <strong>Server Address:</strong><br>
-      scepterngd19.minecra.fr<br>
-      <strong>Port:</strong> 25798
+    <div class="gallery">
+      <h2>Featured Photos</h2>
+      <div class="gallery-grid" id="gallery"></div>
     </div>
 
-    <div class="small">
-      Works on Android, iOS, and Windows Bedrock.<br>
-      Consoles & Java Edition are not supported by the join button.
-    </div>
+    <div class="small">✔ Android • iOS • Windows Bedrock</div>
+  </div>
+
+  <!-- Fullscreen Viewer -->
+  <div class="viewer" id="viewer">
+    <span class="close" onclick="closeViewer()">✕</span>
+    <img id="viewerImg">
+    <div class="viewer-caption" id="viewerCaption"></div>
   </div>
 
   <script>
+    const photos = [
+      { src: 'photo/NewNGDMap.png', caption: 'Near Spawn Map' },
+      { src: 'photo/Rules.png', caption: 'Server Rules' },
+//      { src: 'gallery/3.png', caption: 'PvP Arena' },
+//      { src: 'gallery/4.png', caption: 'Community Hub' }
+    ];
+
+    const gallery = document.getElementById('gallery');
+
+    photos.forEach((p, i) => {
+      const div = document.createElement('div');
+      div.className = 'photo';
+      div.style.backgroundImage = `url(${p.src})`;
+      div.innerHTML = `<div class="caption">${p.caption}</div>`;
+      div.onclick = () => openViewer(i);
+      gallery.appendChild(div);
+    });
+
+    let current = 0;
+    function openViewer(i) {
+      current = i;
+      document.getElementById('viewer').style.display = 'flex';
+      updateViewer();
+    }
+
+    function updateViewer() {
+      document.getElementById('viewerImg').src = photos[current].src;
+      document.getElementById('viewerCaption').textContent = photos[current].caption;
+    }
+
+    function closeViewer() {
+      document.getElementById('viewer').style.display = 'none';
+    }
+
+    // Auto slider
+    setInterval(() => {
+      current = (current + 1) % photos.length;
+      updateViewer();
+    }, 4000);
+
     function openMinecraft() {
-      window.location.href = "minecraft://?addExternalServer=ScepterNGD|scepterngd19.minecra.fr:25798";
+      window.location.href = 'minecraft://?addExternalServer=ScepterNGD|scepterngd19.minecra.fr:25798';
     }
 
     function copyIP() {
-      navigator.clipboard.writeText("scepterngd19.minecra.fr:25798");
-      alert("Server address copied! Paste it in Minecraft → Servers → Add Server");
+      navigator.clipboard.writeText('scepterngd19.minecra.fr:25798');
+      alert('Server address copied!');
     }
   </script>
 </body>
