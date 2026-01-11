@@ -124,7 +124,7 @@ button{
   opacity:.8;
 }
 
-/* 🔒 Auto-hide QR on desktop */
+/* Hide QR on desktop */
 @media(min-width:768px){
   .qr-section{display:none;}
 }
@@ -142,30 +142,24 @@ button{
 
 <div class="container">
 
-  <!-- LOGO -->
   <img src="photo/NGD MC LOGO26 V1.png" class="logo" alt="ScepterNGD Logo">
 
   <h1>ScepterNGD</h1>
 
-  <!-- VERSION BADGE -->
   <div class="version">Bedrock • Survival • Economy • v1.21+</div>
 
-  <!-- STATUS -->
   <div class="status">
     <div class="dot" id="statusDot"></div>
     <span id="statusText">Checking status...</span>
   </div>
 
-  <!-- PLAYER BAR -->
   <div class="player-bar">
     <div class="player-fill" id="playerFill"></div>
   </div>
   <div class="player-text" id="playerText">Players: -- / --</div>
 
-  <!-- JOIN BUTTON (DIRECT JOIN) -->
   <button onclick="joinServer()">Join Server</button>
 
-  <!-- QR (MOBILE ONLY) -->
   <div class="qr-section">
     <img src="photo/ScantoJoinQR.png" alt="Scan to Join ScepterNGD">
     <div class="qr-text">Scan to Join Server</div>
@@ -189,37 +183,47 @@ function joinServer(){
     `minecraft://?addExternalServer=ScepterNGD|${ip}:${port}`;
 }
 
-/* ===== Server Status ===== */
+/* ===== UNIVERSAL SERVER STATUS (CONSISTENT EVERYWHERE) ===== */
 async function updateStatus(){
   try{
-    const res = await fetch(
+    const endpoints = [
+      `https://api.mcsrvstat.us/bedrock/3/${ip}`,
       `https://api.mcsrvstat.us/bedrock/3/${ip}:${port}`
+    ];
+
+    const responses = await Promise.allSettled(
+      endpoints.map(url =>
+        fetch(url).then(r => r.json())
+      )
     );
-    const data = await res.json();
 
-    if(data.online){
-      statusDot.style.background="#00ff99";
-      statusDot.style.boxShadow="0 0 12px #00ff99";
-      statusText.innerText="Online";
+    const data = responses
+      .filter(r => r.status === "fulfilled")
+      .map(r => r.value)
+      .find(d => d.online === true);
 
-      const online = data.players?.online || 0;
-      playerText.innerText = `Players: ${online} / ${maxPlayers}`;
-      playerFill.style.width =
-        `${Math.min(100,(online/maxPlayers)*100)}%`;
-    }else{
-      throw "offline";
-    }
+    if(!data) throw "offline";
+
+    statusDot.style.background = "#00ff99";
+    statusDot.style.boxShadow = "0 0 12px #00ff99";
+    statusText.textContent = "Online";
+
+    const online = data.players?.online || 0;
+    playerText.textContent = `Players: ${online} / ${maxPlayers}`;
+    playerFill.style.width =
+      `${Math.min(100,(online/maxPlayers)*100)}%`;
+
   }catch{
-    statusDot.style.background="red";
-    statusDot.style.boxShadow="0 0 12px red";
-    statusText.innerText="Offline";
-    playerText.innerText = `Players: 0 / ${maxPlayers}`;
-    playerFill.style.width="0%";
+    statusDot.style.background = "red";
+    statusDot.style.boxShadow = "0 0 12px red";
+    statusText.textContent = "Offline";
+    playerText.textContent = `Players: 0 / ${maxPlayers}`;
+    playerFill.style.width = "0%";
   }
 }
 
 updateStatus();
-setInterval(updateStatus,60000);
+setInterval(updateStatus, 60000);
 </script>
 
 </body>
