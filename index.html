@@ -1,226 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScepterNGD | Minecraft Server</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScepterNGD Minecraft Server</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(180deg, #000000, #0a0a0a);
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
+body{
+  margin:0;
+  background:#0b0f1a;
+  color:#fff;
+  text-align:center;
+}
 
-    .card {
-      background: #050505;
-      border-radius: 22px;
-      padding: 32px 26px 30px;
-      max-width: 520px;
-      width: 100%;
-      box-shadow: 0 0 35px rgba(255,255,255,0.15);
-      text-align: center;
-      border: 2px solid rgba(255,255,255,0.35);
-    }
+/* ===== Container ===== */
+.container{
+  max-width:420px;
+  margin:30px auto;
+  padding:22px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#0e1324,#070a14);
+  box-shadow:0 0 40px rgba(0,255,255,.15);
+}
 
-    .logo {
-      width: 150px;
-      height: 150px;
-      margin: 0 auto 12px;
-      background: url('photo/NGD\ MC\ LOGO26\ V1.png') center / contain no-repeat;
-      filter: drop-shadow(0 0 12px rgba(255,255,255,0.6));
-    }
+/* ===== Logo ===== */
+.logo{
+  width:150px;
+  margin-bottom:10px;
+}
 
-    h1 { font-size: 32px; letter-spacing: 2px; }
-    p { opacity: 0.85; font-size: 15px; }
+/* ===== Title ===== */
+h1{
+  margin:10px 0 6px;
+  font-size:26px;
+}
 
-    .btn {
-      width: 100%;
-      padding: 16px;
-      margin: 14px 0;
-      font-size: 16px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-weight: 700;
-      font-family: 'Orbitron', sans-serif;
-      text-transform: uppercase;
-    }
+/* ===== Version Badge ===== */
+.version{
+  display:inline-block;
+  padding:4px 12px;
+  font-size:12px;
+  border-radius:20px;
+  background:rgba(0,255,255,.15);
+  border:1px solid rgba(0,255,255,.4);
+  margin-bottom:12px;
+}
 
-    .btn-join {
-      background: #ffffff;
-      color: #000;
-      box-shadow: 0 0 18px rgba(255,255,255,0.8);
-    }
+/* ===== Status ===== */
+.status{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  margin-bottom:10px;
+}
 
-    .btn-copy {
-      background: transparent;
-      color: #fff;
-      border: 2px solid rgba(255,255,255,0.6);
-    }
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:red;
+  box-shadow:0 0 10px red;
+}
 
-    .gallery {
-      margin-top: 26px;
-    }
+/* ===== Player Bar ===== */
+.player-bar{
+  width:100%;
+  height:14px;
+  background:#1a1f36;
+  border-radius:10px;
+  overflow:hidden;
+  margin:10px 0 4px;
+}
 
-    .gallery h2 {
-      font-size: 18px;
-      letter-spacing: 1px;
-      margin-bottom: 14px;
-    }
+.player-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#00ffff,#00b3ff);
+  transition:.4s;
+}
 
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
+.player-text{
+  font-size:13px;
+  opacity:.85;
+}
 
-    .photo {
-      position: relative;
-      height: 110px;
-      border-radius: 12px;
-      background-size: cover;
-      background-position: center;
-      cursor: pointer;
-      overflow: hidden;
-      border: 2px solid rgba(255,255,255,0.25);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+/* ===== Join Button ===== */
+button{
+  width:100%;
+  margin:14px 0;
+  padding:15px;
+  font-size:16px;
+  font-weight:700;
+  border:none;
+  border-radius:14px;
+  color:#000;
+  cursor:pointer;
+  background:linear-gradient(90deg,#00ffff,#00b3ff);
+  box-shadow:0 0 25px rgba(0,255,255,.45);
+}
 
-    .photo:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 18px rgba(255,255,255,0.7);
-    }
+/* ===== QR Section ===== */
+.qr-section{
+  margin:18px auto;
+  text-align:center;
+}
 
-    .caption {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.7);
-      font-size: 12px;
-      padding: 6px;
-      text-align: center;
-    }
+.qr-section img{
+  width:140px;
+  height:140px;
+  border-radius:14px;
+  border:2px solid rgba(255,255,255,.35);
+  box-shadow:0 0 20px rgba(0,255,255,.5);
+  background:#000;
+}
 
-    /* Fullscreen Viewer */
-    .viewer {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.95);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      flex-direction: column;
-    }
+.qr-text{
+  margin-top:8px;
+  font-size:13px;
+  opacity:.8;
+}
 
-    .viewer img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(255,255,255,0.5);
-    }
+/* 🔒 Auto-hide QR on desktop */
+@media(min-width:768px){
+  .qr-section{display:none;}
+}
 
-    .viewer .viewer-caption {
-      margin-top: 14px;
-      font-size: 14px;
-      opacity: 0.85;
-    }
-
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 24px;
-      font-size: 28px;
-      cursor: pointer;
-    }
-
-    .small {
-      font-size: 13px;
-      opacity: 0.7;
-      margin-top: 18px;
-    }
-  </style>
+/* ===== Footer ===== */
+.small{
+  margin-top:14px;
+  font-size:12px;
+  opacity:.7;
+}
+</style>
 </head>
+
 <body>
-  <div class="card">
-    <div class="logo"></div>
-    <h1>SCEPTERNGD</h1>
-    <p>NextGenDominators Minecraft Bedrock Server</p>
 
-    <button class="btn btn-join" onclick="openMinecraft()">Join Server</button>
-    <button class="btn btn-copy" onclick="copyIP()">Copy Server Address</button>
+<div class="container">
 
-    <div class="gallery">
-      <h2>Featured Photos</h2>
-      <div class="gallery-grid" id="gallery"></div>
-    </div>
+  <!-- LOGO -->
+  <img src="photo/NGD MC LOGO26 V1.png" class="logo" alt="ScepterNGD Logo">
 
-    <div class="small">✔ Android • iOS • Windows Bedrock</div>
+  <h1>ScepterNGD</h1>
+
+  <!-- VERSION BADGE -->
+  <div class="version">Bedrock • Survival • Economy • v1.21+</div>
+
+  <!-- STATUS -->
+  <div class="status">
+    <div class="dot" id="statusDot"></div>
+    <span id="statusText">Checking status...</span>
   </div>
 
-  <!-- Fullscreen Viewer -->
-  <div class="viewer" id="viewer">
-    <span class="close" onclick="closeViewer()">✕</span>
-    <img id="viewerImg">
-    <div class="viewer-caption" id="viewerCaption"></div>
+  <!-- PLAYER BAR -->
+  <div class="player-bar">
+    <div class="player-fill" id="playerFill"></div>
+  </div>
+  <div class="player-text" id="playerText">Players: -- / --</div>
+
+  <!-- JOIN BUTTON (DIRECT JOIN) -->
+  <button onclick="joinServer()">Join Server</button>
+
+  <!-- QR (MOBILE ONLY) -->
+  <div class="qr-section">
+    <img src="photo/ScantoJoinQR.png" alt="Scan to Join ScepterNGD">
+    <div class="qr-text">Scan to Join Server</div>
   </div>
 
-  <script>
-    const photos = [
-      { src: 'photo/NewNGDMap.png', caption: 'Near Spawn Map' },
-      { src: 'photo/Rules.png', caption: 'Server Rules' },
-//      { src: 'gallery/3.png', caption: 'PvP Arena' },
-//      { src: 'gallery/4.png', caption: 'Community Hub' }
-    ];
+  <div class="small">
+    ✔ Android • iOS • Windows Bedrock<br>
+    ✖ Consoles & Java Edition
+  </div>
 
-    const gallery = document.getElementById('gallery');
+</div>
 
-    photos.forEach((p, i) => {
-      const div = document.createElement('div');
-      div.className = 'photo';
-      div.style.backgroundImage = `url(${p.src})`;
-      div.innerHTML = `<div class="caption">${p.caption}</div>`;
-      div.onclick = () => openViewer(i);
-      gallery.appendChild(div);
-    });
+<script>
+const ip = "scepterngd19.minecra.fr";
+const port = 25798;
+const maxPlayers = 20;
 
-    let current = 0;
-    function openViewer(i) {
-      current = i;
-      document.getElementById('viewer').style.display = 'flex';
-      updateViewer();
+/* ===== DIRECT JOIN ===== */
+function joinServer(){
+  window.location.href =
+    `minecraft://?addExternalServer=ScepterNGD|${ip}:${port}`;
+}
+
+/* ===== Server Status ===== */
+async function updateStatus(){
+  try{
+    const res = await fetch(
+      `https://api.mcsrvstat.us/bedrock/3/${ip}:${port}`
+    );
+    const data = await res.json();
+
+    if(data.online){
+      statusDot.style.background="#00ff99";
+      statusDot.style.boxShadow="0 0 12px #00ff99";
+      statusText.innerText="Online";
+
+      const online = data.players?.online || 0;
+      playerText.innerText = `Players: ${online} / ${maxPlayers}`;
+      playerFill.style.width =
+        `${Math.min(100,(online/maxPlayers)*100)}%`;
+    }else{
+      throw "offline";
     }
+  }catch{
+    statusDot.style.background="red";
+    statusDot.style.boxShadow="0 0 12px red";
+    statusText.innerText="Offline";
+    playerText.innerText = `Players: 0 / ${maxPlayers}`;
+    playerFill.style.width="0%";
+  }
+}
 
-    function updateViewer() {
-      document.getElementById('viewerImg').src = photos[current].src;
-      document.getElementById('viewerCaption').textContent = photos[current].caption;
-    }
+updateStatus();
+setInterval(updateStatus,60000);
+</script>
 
-    function closeViewer() {
-      document.getElementById('viewer').style.display = 'none';
-    }
-
-    // Auto slider
-    setInterval(() => {
-      current = (current + 1) % photos.length;
-      updateViewer();
-    }, 4000);
-
-    function openMinecraft() {
-      window.location.href = 'minecraft://?addExternalServer=ScepterNGD|scepterngd19.minecra.fr:25798';
-    }
-
-    function copyIP() {
-      navigator.clipboard.writeText('scepterngd19.minecra.fr:25798');
-      alert('Server address copied!');
-    }
-  </script>
 </body>
 </html>
