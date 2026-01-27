@@ -5,118 +5,190 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ScepterNGD Minecraft Server</title>
 
-<style>
-*{box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+<!-- Favicons -->
+<link rel="icon" type="image/x-icon" href="photo/favicon_io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="photo/favicon_io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="photo/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="photo/favicon_io/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="photo/favicon_io/android-chrome-512x512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="photo/favicon_io/apple-touch-icon.png">
 
-body{
-  margin:0;
-  background:#0b0f1a;
-  color:#fff;
-  text-align:center;
+<style>
+* { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+body {
+  margin: 0;
+  background: #0b0f1a;
+  color: #fff;
+  text-align: center;
+}
+
+/* ===== Glow Animation (shared) ===== */
+@keyframes glowPulse {
+  0%, 100% { 
+    box-shadow: 
+      0 0 10px rgba(0,255,255,.25),
+      0 0 30px rgba(0,255,255,.15),
+      0 0 50px rgba(0,255,255,.05);
+  }
+  50% { 
+    box-shadow: 
+      0 0 25px rgba(0,255,255,.45),
+      0 0 50px rgba(0,255,255,.3),
+      0 0 80px rgba(0,255,255,.1);
+  }
 }
 
 /* ===== Container ===== */
-.container{
-  max-width:420px;
-  margin:30px auto;
-  padding:22px;
-  border-radius:22px;
-  background:linear-gradient(145deg,#0e1324,#070a14);
-  box-shadow:0 0 40px rgba(0,255,255,.15);
+.container {
+  max-width: 420px;
+  margin: 30px auto;
+  padding: 22px;
+  border-radius: 22px;
+  background: linear-gradient(145deg,#0e1324,#070a14);
+  animation: glowPulse 2.5s infinite alternate;
+  position: relative;
+}
+
+/* ===== Soft Neon Edge via Pseudo Element ===== */
+.container::before {
+  content: '';
+  position: absolute;
+  top: -5px; left: -5px; right: -5px; bottom: -5px;
+  border-radius: 27px;
+  background: linear-gradient(45deg, #00ffff, #00b3ff);
+  filter: blur(12px);
+  opacity: 0.4;
+  z-index: -1;
 }
 
 /* ===== Logo ===== */
-.logo{
-  width:150px;
-  margin-bottom:10px;
+.logo {
+  width: 150px;
+  margin-bottom: 10px;
 }
 
 /* ===== Title ===== */
-h1{
-  margin:10px 0 6px;
-  font-size:26px;
+h1 {
+  margin: 10px 0 6px;
+  font-size: 26px;
 }
 
-/* ===== Version Badge ===== */
-.version{
-  display:inline-block;
-  padding:4px 12px;
-  font-size:12px;
-  border-radius:20px;
-  background:rgba(0,255,255,.15);
-  border:1px solid rgba(0,255,255,.4);
-  margin-bottom:12px;
+/* ===== Version Badge with Tooltip ===== */
+.version {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 12px;
+  border-radius: 20px;
+  background: rgba(0,255,255,.15);
+  border: 1px solid rgba(0,255,255,.4);
+  margin-bottom: 12px;
+  cursor: default;
+  position: relative;
+}
+
+.version:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,.85);
+  color: #00ffff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 10px;
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: 10;
 }
 
 /* ===== Status ===== */
-.status{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  font-size:14px;
-  margin-bottom:10px;
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.status[role="status"] {
+  aria-live: polite;
 }
 
-.dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:red;
-  box-shadow:0 0 10px red;
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: red;
+  box-shadow: 0 0 10px red;
 }
 
 /* ===== Player Bar ===== */
-.player-bar{
-  width:100%;
-  height:14px;
-  background:#1a1f36;
-  border-radius:10px;
-  overflow:hidden;
-  margin:10px 0 4px;
+.player-bar {
+  width: 100%;
+  height: 14px;
+  background: #1a1f36;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0 4px;
 }
 
-.player-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#00ffff,#00b3ff);
-  transition:.4s;
+.player-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#00ffff,#00b3ff);
+  transition: width 0.4s ease-in-out;
 }
 
-.player-text{
-  font-size:13px;
-  opacity:.85;
+.player-text {
+  font-size: 13px;
+  opacity: .85;
 }
 
-/* ===== Join Button ===== */
-button{
-  width:100%;
-  margin:14px 0;
-  padding:15px;
-  font-size:16px;
-  font-weight:700;
-  border:none;
-  border-radius:14px;
-  color:#000;
-  cursor:pointer;
-  background:linear-gradient(90deg,#00ffff,#00b3ff);
-  box-shadow:0 0 25px rgba(0,255,255,.45);
+/* ===== Join Button with Neon Glow ===== */
+button {
+  width: 100%;
+  margin: 14px 0;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 14px;
+  color: #000;
+  cursor: pointer;
+  background: linear-gradient(90deg,#00ffff,#00b3ff);
+  animation: glowPulse 2.5s infinite alternate;
+  position: relative;
+  z-index: 1;
 }
 
-.qr-section img{
-  width:140px;
-  height:140px;
-  border-radius:14px;
-  border:2px solid rgba(255,255,255,.35);
-  box-shadow:0 0 20px rgba(0,255,255,.5);
-  background:#000;
+/* Neon edge for button via pseudo element */
+button::before {
+  content: '';
+  position: absolute;
+  top: -4px; left: -4px; right: -4px; bottom: -4px;
+  border-radius: 18px;
+  background: linear-gradient(45deg, #00ffff, #00b3ff);
+  filter: blur(10px);
+  opacity: 0.35;
+  z-index: -1;
 }
 
 /* ===== Footer ===== */
-.small{
-  margin-top:14px;
-  font-size:12px;
-  opacity:.7;
+.small {
+  margin-top: 14px;
+  font-size: 12px;
+  opacity: .7;
+}
+
+/* ===== Responsive Text Scaling ===== */
+@media (max-width: 380px) {
+  h1 { font-size: 22px; }
+  .version { font-size: 11px; padding: 3px 10px; }
+  .player-text { font-size: 12px; }
+  button { font-size: 15px; padding: 12px; }
 }
 </style>
 </head>
@@ -129,9 +201,11 @@ button{
 
   <h1>ScepterNGD</h1>
 
-  <div class="version">Bedrock • Survival • Economy • v1.21+</div>
+  <div class="version" data-tooltip="Map: Survival Island • Rules: No griefing, Be respectful, Economy enabled">
+    Bedrock • Survival • Economy • v1.21+
+  </div>
 
-  <div class="status">
+  <div class="status" role="status" aria-live="polite">
     <div class="dot" id="statusDot"></div>
     <span id="statusText">Checking status...</span>
   </div>
@@ -157,11 +231,10 @@ const maxPlayers = 20;
 
 /* ===== DIRECT JOIN ===== */
 function joinServer(){
-  window.location.href =
-    `minecraft://?addExternalServer=ScepterNGD|${ip}:${port}`;
+  window.location.href = `minecraft://?addExternalServer=ScepterNGD|${ip}:${port}`;
 }
 
-/* ===== UNIVERSAL SERVER STATUS (CONSISTENT EVERYWHERE) ===== */
+/* ===== UNIVERSAL SERVER STATUS ===== */
 async function updateStatus(){
   try{
     const endpoints = [
@@ -170,9 +243,7 @@ async function updateStatus(){
     ];
 
     const responses = await Promise.allSettled(
-      endpoints.map(url =>
-        fetch(url).then(r => r.json())
-      )
+      endpoints.map(url => fetch(url).then(r => r.json()))
     );
 
     const data = responses
@@ -188,10 +259,9 @@ async function updateStatus(){
 
     const online = data.players?.online || 0;
     playerText.textContent = `Players: ${online} / ${maxPlayers}`;
-    playerFill.style.width =
-      `${Math.min(100,(online/maxPlayers)*100)}%`;
+    playerFill.style.width = `${Math.min(100,(online/maxPlayers)*100)}%`;
 
-  }catch{
+  } catch {
     statusDot.style.background = "red";
     statusDot.style.boxShadow = "0 0 12px red";
     statusText.textContent = "Offline";
@@ -206,5 +276,3 @@ setInterval(updateStatus, 60000);
 
 </body>
 </html>
-
-
